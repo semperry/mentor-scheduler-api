@@ -22,6 +22,12 @@ let Session = new Schema(
       type: Boolean,
       default: false
     },
+    day: {
+      type: String
+    },
+    time: {
+      type: String
+    },
     info: [
       {
         notes: {

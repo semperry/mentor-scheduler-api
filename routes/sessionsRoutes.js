@@ -68,4 +68,15 @@ SessionsRouter.route("/update/:id").post((req, res) => {
   });
 });
 
+// DELETE session
+SessionsRouter.route("/delete/:id").delete((req, res) => {
+  Sessions.findOneAndDelete({ _id: req.params.id }, (err, session) => {
+    if (err) {
+      res.json("Unable to delete session", err);
+    } else {
+      res.json("Successfully deleted");
+    }
+  });
+});
+
 module.exports = SessionsRouter

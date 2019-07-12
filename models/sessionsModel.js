@@ -23,10 +23,12 @@ let Session = new Schema(
       default: false
     },
     day: {
-      type: String
+      type: String,
+      required: true
     },
     time: {
-      type: String
+      type: String,
+      required: true
     },
     info: [
       {

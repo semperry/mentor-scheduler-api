@@ -2,32 +2,34 @@ require("dotenv").config();
 const express = require("express");
 const PORT = process.env.PORT || 4000;
 const app = express();
-const bodyParser = require("body-parser")
-const cors = require("cors")
-const mongoose = require('mongoose')
-const sessionRoutes = require('./routes/sessionsRoutes')
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const mongoose = require("mongoose");
 
+const studentRoutes = require("./routes/studentRoutes");
+const userRoutes = require("./routes/userRoutes");
+const loginSessionRoutes = require("./routes/loggedInRoutes");
 
 mongoose.Promise = global.Promise;
+mongoose.set("useCreateIndex", true);
 mongoose
   .connect(process.env.MONGO_URI, { useNewUrlParser: true })
   .then(() => {
-    console.log('DB Connected!');
-    
+    console.log("DB Connected!");
   })
   .catch(err => {
     console.log(`connection error ${err}`);
-    
-  })
+  });
 
-app.disable('x-powered-by')
+app.disable("x-powered-by");
 
-app.use(cors())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use("/", sessionRoutes)
-
+app.use("/students", studentRoutes);
+app.use("/mentors", userRoutes);
+app.use("/sessions", loginSessionRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is up on Port ${PORT}`);

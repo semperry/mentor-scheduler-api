@@ -42,33 +42,59 @@ StudentRouter.route("/:id").get((req, res) => {
 
 // Update Session
 StudentRouter.route("/update/:id").post((req, res) => {
-  Sessions.findById(req.params.id, (err, session) => {
-    if (!session) {
-      response.status(404).send("session not found");
+  Students.findById(req.params.id, (err, student) => {
+    if (!student) {
+      response.status(404).send("student not found");
     } else {
-      session.name = req.body.name;
-      session.email = req.body.email;
-      session.phone = req.body.phone;
-      session.assigned = req.body.assigned;
-      session.day = req.body.day;
-      session.time = req.body.time;
-      session.info.notes = req.body.info.notes;
-      session.info.hours_studied = req.body.info.hours_studied;
-      session.info.weekly_goal = req.body.info.weekly_goal;
-      session.info.questions = req.body.info.questions;
-      session.completed = req.body.completed;
-      session.__v++;
+      student.first_name = req.body.first_name;
+      student.last_name = req.body.last_name;
+      student.email = req.body.email;
+      student.phone = req.body.phone;
+      student.course = req.body.course;
+      student.assigned_to = req.body.assigned_to;
+      student.day = req.body.day;
+      student.time = req.body.time;
+      student.special_instructions = req.body.special_instructions;
+      student.info = req.body.info;
+      // student.info.notes = req.body.info.notes;
+      // student.info.hours_studied = req.body.info.hours_studied;
+      // student.info.weekly_goal = req.body.info.weekly_goal;
+      // student.info.questions = req.body.info.questions;
+      student.completed = req.body.completed;
+      student.__v++;
 
-      session
+      student
         .save()
-        .then(session => {
-          res.json("Updated session successfully" + " " + session);
+        .then(student => {
+          res.json("Updated student successfully" + " " + student);
         })
         .catch(error => {
-          res.status(400).send("unable to update the session" + " " + error);
+          res.status(400).send("unable to update the student" + " " + error);
         });
     }
   });
+});
+
+// Assign Session
+StudentRouter.route("/assign-to/:id").put((req, res) => {
+  Students.findOneAndUpdate(
+    { _id: req.params.id },
+    {
+      $set: {
+        assigned_to: req.body.assigned_to
+      }
+    },
+    {
+      upsert: false
+    },
+    (err, result) => {
+      if (err) {
+        return res.status(400).send(err);
+      } else {
+        return res.send("assigned to: " + " " + req.body.assigned_to);
+      }
+    }
+  );
 });
 
 // DELETE session

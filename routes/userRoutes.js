@@ -45,7 +45,6 @@ UserRouter.route("/email/:email").get((req, res) => {
     if (!user) {
       return res.status(404).send(`Mentor not found: ${err}`);
     } else {
-      // return res.status(200).json(user);
       return res.status(200).json({
         id: user._id,
         email: user.email,
@@ -72,8 +71,8 @@ UserRouter.route("/new").post((req, res) => {
       res.status(400).send(`post error: ${err}`);
     });
 });
-// Patch
-// Delete
+
+// Put
 
 // Login
 UserRouter.route("/login").post((req, res) => {
@@ -97,7 +96,7 @@ UserRouter.route("/login").post((req, res) => {
     });
 });
 
-// Delete Session
+// Delete mentor
 UserRouter.route("/delete/:id").delete((req, res) => {
   Users.findOneAndDelete({ _id: req.params.id }, (err, user) => {
     if (!user) {

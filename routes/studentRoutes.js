@@ -97,13 +97,41 @@ StudentRouter.route("/assign-to/:id").put((req, res) => {
   );
 });
 
+// Put update from new session form
+StudentRouter.route("/update-form/:id").put((req, res) => {
+  Students.findByIdAndUpdate(
+    { _id: req.params.id },
+    {
+      $set: {
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        email: req.body.email,
+        phone: req.body.phone,
+        special_instructions: req.body.special_instructions,
+        day: req.body.day,
+        time: req.body.time
+      }
+    },
+    {
+      upsert: false
+    },
+    (err, result) => {
+      if (err) {
+        return res.status(400).send(err);
+      } else {
+        return res.send("succesfully updated: " + " " + result);
+      }
+    }
+  );
+});
+
 // DELETE session
 StudentRouter.route("/delete/:id").delete((req, res) => {
   Students.findOneAndDelete({ _id: req.params.id }, (err, student) => {
     if (err) {
       res.json("Unable to delete session", err);
     } else {
-      res.json("Successfully deleted");
+      res.json("Successfully deleted" + " " + student);
     }
   });
 });

@@ -97,6 +97,50 @@ StudentRouter.route("/assign-to/:id").put((req, res) => {
   );
 });
 
+// Change complete boolean
+StudentRouter.route("/completed/:id").put((req, res) => {
+  Students.findOneAndUpdate(
+    { _id: req.params.id },
+    {
+      $set: {
+        completed: req.body.completed
+      }
+    },
+    {
+      upsert: false
+    },
+    (err, result) => {
+      if (err) {
+        return res.status(400).send(err);
+      } else {
+        return res.send("session completed: " + " " + res.completed);
+      }
+    }
+  );
+});
+
+// Change complete boolean
+StudentRouter.route("/notes/:id").put((req, res) => {
+  Students.findOneAndUpdate(
+    { _id: req.params.id },
+    {
+      $push: {
+        info: req.body.info
+      }
+    },
+    {
+      upsert: false
+    },
+    (err, result) => {
+      if (err) {
+        return res.status(400).send(err);
+      } else {
+        return res.send("notes added: " + " " + req.body.info);
+      }
+    }
+  );
+});
+
 // Put update from new session form
 StudentRouter.route("/update-form/:id").put((req, res) => {
   Students.findByIdAndUpdate(

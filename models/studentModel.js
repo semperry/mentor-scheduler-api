@@ -13,7 +13,8 @@ const Student = new Schema({
   },
   email: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   phone: {
     type: String,
@@ -49,6 +50,14 @@ const Student = new Schema({
       },
       questions: {
         type: String
+      },
+      submitted_by: {
+        type: String,
+        required: true
+      },
+      date: {
+        type: Date,
+        default: Date.now
       }
     }
   ],
@@ -60,3 +69,7 @@ const Student = new Schema({
 });
 
 module.exports = mongoose.model("student", Student);
+
+// ON complete, push to new array.
+// Admin control, eod compile all notes from completed sessions, push to that array
+// Remove assigned students from userModel?

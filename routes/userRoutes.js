@@ -14,16 +14,16 @@ UserRouter.route("/").get((req, res) => {
   });
 });
 
-// // Get one
-// UserRouter.route("/:id").get((req, res) => {
-//   Users.findById(req.params.id, (err, user) => {
-//     if (err) {
-//       res.status(404).send(`Mentor not found: ${err}`);
-//     } else {
-//       res.json(user);
-//     }
-//   });
-// });
+// Get one
+UserRouter.route("/:id").get((req, res) => {
+  Users.findById(req.params.id, (err, user) => {
+    if (err) {
+      res.status(404).send(`Mentor not found: ${err}`);
+    } else {
+      res.json(user);
+    }
+  });
+});
 
 // find one by name
 UserRouter.route("/search-name").post((req, res) => {

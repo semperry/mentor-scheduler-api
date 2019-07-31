@@ -26,6 +26,9 @@ const Student = new Schema({
   assigned_to: {
     type: String
   },
+  last_submitted_by: {
+    type: String
+  },
   day: {
     type: String,
     required: true
@@ -40,6 +43,9 @@ const Student = new Schema({
   info: [
     {
       notes: {
+        type: String
+      },
+      percentage: {
         type: String
       },
       hours_studied: {
@@ -69,7 +75,3 @@ const Student = new Schema({
 });
 
 module.exports = mongoose.model("student", Student);
-
-// ON complete, push to new array.
-// Admin control, eod compile all notes from completed sessions, push to that array
-// Remove assigned students from userModel?

@@ -10,6 +10,7 @@ const mongoose = require("mongoose");
 const studentRoutes = require("./routes/studentRoutes");
 const userRoutes = require("./routes/userRoutes");
 const loginSessionRoutes = require("./routes/loggedInRoutes");
+const redisRoutes = require("./routes/redis-routes");
 
 mongoose.Promise = global.Promise;
 mongoose.set("useCreateIndex", true);
@@ -34,6 +35,7 @@ app.use(bodyParser.json());
 app.use("/students", studentRoutes);
 app.use("/mentors", userRoutes);
 app.use("/sessions", loginSessionRoutes);
+app.use("/redis", redisRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is up on Port ${PORT}`);

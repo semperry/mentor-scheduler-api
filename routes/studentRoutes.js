@@ -56,10 +56,6 @@ StudentRouter.route("/update/:id").post((req, res) => {
       student.time = req.body.time;
       student.special_instructions = req.body.special_instructions;
       student.info = req.body.info;
-      // student.info.notes = req.body.info.notes;
-      // student.info.hours_studied = req.body.info.hours_studied;
-      // student.info.weekly_goal = req.body.info.weekly_goal;
-      // student.info.questions = req.body.info.questions;
       student.completed = req.body.completed;
       student.__v++;
 
@@ -103,7 +99,9 @@ StudentRouter.route("/completed/:id").put((req, res) => {
     { _id: req.params.id },
     {
       $set: {
-        completed: req.body.completed
+        completed: req.body.completed,
+        assigned_to: req.body.assigned_to,
+        last_submitted_by: req.body.last_submitted_by
       }
     },
     {

@@ -54,4 +54,24 @@ RedisRouter.route("/completed/:id").get((req, res) => {
   });
 });
 
+// GET to check if flag exists
+RedisRouter.route("/completed").get((req, res) => {
+  connect.createConnection().then(client => {
+    client.keys("*", (err, results) => {
+      if (results) {
+        res.status(200).send(results);
+      } else {
+        res.status(404).send(err);
+      }
+    });
+    client.quit((err, reply) => {
+      if (!err) {
+        console.log("Get quit response" + reply);
+      } else {
+        console.log("Get quit error" + err);
+      }
+    });
+  });
+});
+
 module.exports = RedisRouter;

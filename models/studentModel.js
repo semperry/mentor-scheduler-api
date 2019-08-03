@@ -20,9 +20,6 @@ const Student = new Schema({
     type: String,
     required: true
   },
-  course: {
-    type: String
-  },
   assigned_to: {
     type: String
   },
@@ -66,12 +63,7 @@ const Student = new Schema({
         default: Date.now
       }
     }
-  ],
-  completed: {
-    type: Boolean,
-    required: true,
-    default: false
-  }
+  ]
 });
 
 module.exports = mongoose.model("student", Student);

@@ -21,8 +21,7 @@ const User = new Schema({
   },
   role: {
     type: String
-  },
-  assigned_sessions: []
+  }
 });
 
 module.exports = mongoose.model("users", User);

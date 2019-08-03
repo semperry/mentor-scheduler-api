@@ -1,5 +1,4 @@
 require("dotenv").config();
-const socketIO = require("socket.io");
 const express = require("express");
 const PORT = process.env.PORT || 4000;
 const app = express();
@@ -36,6 +35,10 @@ app.use("/students", studentRoutes);
 app.use("/mentors", userRoutes);
 app.use("/sessions", loginSessionRoutes);
 app.use("/redis", redisRoutes);
+
+app.get("/", (req, res) => {
+  res.send("<h1>Mentor Scheduler API</h1");
+});
 
 app.listen(PORT, () => {
   console.log(`Server is up on Port ${PORT}`);

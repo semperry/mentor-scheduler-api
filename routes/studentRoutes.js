@@ -1,3 +1,4 @@
+// TODO: Update from form needs to be fixed lest the notes be overwritten
 const express = require("express");
 const StudentRouter = express.Router();
 
@@ -99,7 +100,6 @@ StudentRouter.route("/completed/:id").put((req, res) => {
     { _id: req.params.id },
     {
       $set: {
-        completed: req.body.completed,
         assigned_to: req.body.assigned_to,
         last_submitted_by: req.body.last_submitted_by
       }

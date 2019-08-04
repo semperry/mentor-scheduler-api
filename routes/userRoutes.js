@@ -1,5 +1,6 @@
 const express = require("express");
 const UserRouter = express.Router();
+const bcrypt = require("bcrypt");
 
 const Users = require("../models/userModel");
 
@@ -50,8 +51,7 @@ UserRouter.route("/email/:email").get((req, res) => {
         email: user.email,
         role: user.role,
         first_name: user.first_name,
-        last_name: user.last_name,
-        assigned_sessions: user.assigned_sessions
+        last_name: user.last_name
       });
     }
   }).catch(err => {
@@ -59,17 +59,24 @@ UserRouter.route("/email/:email").get((req, res) => {
   });
 });
 
-// Post
 UserRouter.route("/new").post((req, res) => {
   const user = new Users(req.body);
-  user
-    .save()
-    .then(user => {
-      res.status(200).json(user);
-    })
-    .catch(err => {
-      res.status(400).send(`post error: ${err}`);
+  const password = req.body.password;
+
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(password, salt, (err, hash) => {
+      user.password = hash;
+
+      user
+        .save()
+        .then(user => {
+          res.status(200).json(user);
+        })
+        .catch(err => {
+          res.status(201).send(`post error: ${err}`);
+        });
     });
+  });
 });
 
 // Put
@@ -80,19 +87,24 @@ UserRouter.route("/login").post((req, res) => {
     .then(user => {
       if (!user) {
         return res.status(404).send("Email not found");
-      } else if (req.body.password === user.password) {
-        return res.status(200).json({
-          id: user._id,
-          email: user.email,
-          role: user.role,
-          first_name: user.first_name,
-          last_name: user.last_name,
-          assigned_sessions: user.assigned_sessions
+      } else {
+        bcrypt.compare(req.body.password, user.password, (err, result) => {
+          if (result == true) {
+            res.status(200).json({
+              id: user._id,
+              email: user.email,
+              role: user.role,
+              first_name: user.first_name,
+              last_name: user.last_name
+            });
+          } else {
+            res.status(404).send("password does not match " + err);
+          }
         });
       }
     })
     .catch(err => {
-      res.status(400).send("login error: " + err);
+      res.send("login error: " + err);
     });
 });
 

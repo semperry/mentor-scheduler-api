@@ -1,4 +1,3 @@
-// TODO: Update from form needs to be fixed lest the notes be overwritten
 const express = require("express");
 const StudentRouter = express.Router();
 
@@ -37,37 +36,6 @@ StudentRouter.route("/:id").get((req, res) => {
       res.status(404).send(`Get One Error: ${err}`);
     } else {
       res.json(student);
-    }
-  });
-});
-
-// Update Session
-StudentRouter.route("/update/:id").post((req, res) => {
-  Students.findById(req.params.id, (err, student) => {
-    if (!student) {
-      response.status(404).send("student not found");
-    } else {
-      student.first_name = req.body.first_name;
-      student.last_name = req.body.last_name;
-      student.email = req.body.email;
-      student.phone = req.body.phone;
-      student.course = req.body.course;
-      student.assigned_to = req.body.assigned_to;
-      student.day = req.body.day;
-      student.time = req.body.time;
-      student.special_instructions = req.body.special_instructions;
-      student.info = req.body.info;
-      student.completed = req.body.completed;
-      student.__v++;
-
-      student
-        .save()
-        .then(student => {
-          res.json("Updated student successfully" + " " + student);
-        })
-        .catch(error => {
-          res.status(400).send("unable to update the student" + " " + error);
-        });
     }
   });
 });
@@ -179,3 +147,34 @@ StudentRouter.route("/delete/:id").delete((req, res) => {
 });
 
 module.exports = StudentRouter;
+
+// Update Session
+// StudentRouter.route("/update/:id").post((req, res) => {
+//   Students.findById(req.params.id, (err, student) => {
+//     if (!student) {
+//       response.status(404).send("student not found");
+//     } else {
+//       student.first_name = req.body.first_name;
+//       student.last_name = req.body.last_name;
+//       student.email = req.body.email;
+//       student.phone = req.body.phone;
+//       student.course = req.body.course;
+//       student.assigned_to = req.body.assigned_to;
+//       student.day = req.body.day;
+//       student.time = req.body.time;
+//       student.special_instructions = req.body.special_instructions;
+//       student.info = req.body.info;
+//       student.completed = req.body.completed;
+//       student.__v++;
+
+//       student
+//         .save()
+//         .then(student => {
+//           res.json("Updated student successfully" + " " + student);
+//         })
+//         .catch(error => {
+//           res.status(400).send("unable to update the student" + " " + error);
+//         });
+//     }
+//   });
+// });

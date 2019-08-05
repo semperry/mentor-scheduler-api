@@ -59,6 +59,7 @@ UserRouter.route("/email/:email").get((req, res) => {
   });
 });
 
+// Post new
 UserRouter.route("/new").post((req, res) => {
   const user = new Users(req.body);
   const password = req.body.password;

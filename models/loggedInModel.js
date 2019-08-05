@@ -4,8 +4,7 @@ const Schema = mongoose.Schema;
 const LoggedIn = new Schema({
   email: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   session: {
     type: String,

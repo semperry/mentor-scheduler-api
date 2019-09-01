@@ -51,7 +51,9 @@ UserRouter.route("/email/:email").get((req, res) => {
         email: user.email,
         role: user.role,
         first_name: user.first_name,
-        last_name: user.last_name
+        last_name: user.last_name,
+        week_one: user.week_one,
+        week_two: user.week_two
       });
     }
   }).catch(err => {
@@ -80,9 +82,34 @@ UserRouter.route("/new").post((req, res) => {
   });
 });
 
-// Put
+// ADDED vvv
 
-// Login
+// UPDATING A USER
+UserRouter.route('/update/:id').post((request, response) => {
+  Users.findById(request.params.id, (error, user) => {
+      if (!user)
+          response.status(404).send("data is not found");
+      else
+
+          user.email =  request.body.email
+          user.password =  request.body.password
+          user.first_name =  request.body.first_name
+          user.last_name =  request.body.last_name
+          user.role =  request.body.role
+          user.week_one =  request.body.week_one
+          user.week_two =  request.body.week_two
+
+          user.save().then(user => {
+              response.json('user updated!');
+          })
+          .catch(error => {
+              response.status(400).send("Update not possible");
+          });
+      });
+});
+
+
+// Login ADDED WK 1 WK 2
 UserRouter.route("/login").post((req, res) => {
   Users.findOne({ email: req.body.email })
     .then(user => {
@@ -96,7 +123,9 @@ UserRouter.route("/login").post((req, res) => {
               email: user.email,
               role: user.role,
               first_name: user.first_name,
-              last_name: user.last_name
+              last_name: user.last_name,
+              week_one: user.week_one,
+              week_two: user.week_two
             });
           } else {
             res.status(404).send("password does not match " + err);

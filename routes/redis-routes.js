@@ -1,4 +1,3 @@
-// TODO: Change expiration time to appropriate kill zone
 const express = require("express");
 const RedisRouter = express.Router();
 const bodyParser = require("body-parser");
@@ -23,7 +22,7 @@ RedisRouter.route("/complete").post((req, res) => {
       }
     });
 
-    client.expire(id, 10);
+    client.expire(id, 57600);
 
     client.quit((err, reply) => {
       if (!err) {

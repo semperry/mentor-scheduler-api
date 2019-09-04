@@ -20,190 +20,128 @@ const User = new Schema({
     required: true
   },
   role: {
-    type: String,
-    required: true
+    type: String
   },
-  week_one: {
-    type: Array,
-    default:
-      {
-        sunday: {
-          start: {
-            type: String,
-            required: true,
-            default: ""
-          },
-          end: {
-            type: String,
-            required: true,
-            default: ""
-          }
+  week_one: [
+    {
+      sunday: {
+        start: {
+          type: String
         },
-        monday: {
-          start: {
-            type: String,
-            required: true,
-            default: ""
-          },
-          end: {
-            type: String,
-            required: true,
-            default: ""
-          }
+        end: {
+          type: String
+        }
+      },
+      monday: {
+        start: {
+          type: String
         },
-        tuesday: {
-          start: {
-            type: String,
-            required: true,
-            default: ""
-          },
-          end: {
-            type: String,
-            required: true,
-            default: ""
-          }
+        end: {
+          type: String
+        }
+      },
+      tuesday: {
+        start: {
+          type: String
         },
-        wednesday: {
-          start: {
-            type: String,
-            required: true,
-            default: ""
-          },
-          end: {
-            type: String,
-            required: true,
-            default: ""
-          }
+        end: {
+          type: String
+        }
+      },
+      wednesday: {
+        start: {
+          type: String
         },
-        thursday: {
-          start: {
-            type: String,
-            required: true,
-            default: ""
-          },
-          end: {
-            type: String,
-            required: true,
-            default: ""
-          }
+        end: {
+          type: String
+        }
+      },
+      thursday: {
+        start: {
+          type: String
         },
-        friday: {
-          start: {
-            type: String,
-            required: true,
-            default: ""
-          },
-          end: {
-            type: String,
-            required: true,
-            default: ""
-          }
+        end: {
+          type: String
+        }
+      },
+      friday: {
+        start: {
+          type: String
         },
-        saturday: {
-          start: {
-            type: String,
-            required: true,
-            default: ""
-          },
-          end: {
-            type: String,
-            required: true,
-            default: ""
-          }
+        end: {
+          type: String
+        }
+      },
+      saturday: {
+        start: {
+          type: String
+        },
+        end: {
+          type: String
         }
       }
-  },
-  week_two: {
-    type: Array,
-    default: 
-      {
-        sunday: {
-          start: {
-            type: String,
-            required: true,
-            default: ""
-          },
-          end: {
-            type: String,
-            required: true,
-            default: ""
-          }
+    }
+  ],
+  week_two: [
+    {
+      sunday: {
+        start: {
+          type: String
         },
-        monday: {
-          start: {
-            type: String,
-            required: true,
-            default: ""
-          },
-          end: {
-            type: String,
-            required: true,
-            default: ""
-          }
+        end: {
+          type: String
+        }
+      },
+      monday: {
+        start: {
+          type: String
         },
-        tuesday: {
-          start: {
-            type: String,
-            required: true,
-            default: ""
-          },
-          end: {
-            type: String,
-            required: true,
-            default: ""
-          }
+        end: {
+          type: String
+        }
+      },
+      tuesday: {
+        start: {
+          type: String
         },
-        wednesday: {
-          start: {
-            type: String,
-            required: true,
-            default: ""
-          },
-          end: {
-            type: String,
-            required: true,
-            default: ""
-          }
+        end: {
+          type: String
+        }
+      },
+      wednesday: {
+        start: {
+          type: String
         },
-        thursday: {
-          start: {
-            type: String,
-            required: true,
-            default: ""
-          },
-          end: {
-            type: String,
-            required: true,
-            default: ""
-          }
+        end: {
+          type: String
+        }
+      },
+      thursday: {
+        start: {
+          type: String
         },
-        friday: {
-          start: {
-            type: String,
-            required: true,
-            default: ""
-          },
-          end: {
-            type: String,
-            required: true,
-            default: ""
-          }
+        end: {
+          type: String
+        }
+      },
+      friday: {
+        start: {
+          type: String
         },
-        saturday: {
-          start: {
-            type: String,
-            required: true,
-            default: ""
-          },
-          end: {
-            type: String,
-            required: true,
-            default: ""
-          }
+        end: {
+          type: String
+        }
+      },
+      saturday: {
+        start: {
+          type: String
+        },
+        end: {
+          type: String
         }
       }
-    ]
-  }
+    }
+  ]
 });
 
 module.exports = mongoose.model("User", User);

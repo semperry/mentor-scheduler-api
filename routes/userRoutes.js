@@ -69,6 +69,70 @@ UserRouter.route("/new").post((req, res) => {
   bcrypt.genSalt(10, (err, salt) => {
     bcrypt.hash(password, salt, (err, hash) => {
       user.password = hash;
+      (user.week_one = [
+        {
+          sunday: {
+            start: "",
+            end: ""
+          },
+          monday: {
+            start: "",
+            end: ""
+          },
+          tuesday: {
+            start: "",
+            end: ""
+          },
+          wednesday: {
+            start: "",
+            end: ""
+          },
+          thursday: {
+            start: "",
+            end: ""
+          },
+          friday: {
+            start: "",
+            end: ""
+          },
+          saturday: {
+            start: "",
+            end: ""
+          }
+        }
+      ]),
+        (user.week_two = [
+          {
+            sunday: {
+              start: "",
+              end: ""
+            },
+            monday: {
+              start: "",
+              end: ""
+            },
+            tuesday: {
+              start: "",
+              end: ""
+            },
+            wednesday: {
+              start: "",
+              end: ""
+            },
+            thursday: {
+              start: "",
+              end: ""
+            },
+            friday: {
+              start: "",
+              end: ""
+            },
+            saturday: {
+              start: "",
+              end: ""
+            }
+          }
+        ]);
 
       user
         .save()
@@ -85,29 +149,27 @@ UserRouter.route("/new").post((req, res) => {
 // ADDED vvv
 
 // UPDATING A USER
-UserRouter.route('/update/:id').post((request, response) => {
+UserRouter.route("/update/:id").post((request, response) => {
   Users.findById(request.params.id, (error, user) => {
-      if (!user)
-          response.status(404).send("data is not found");
-      else
+    if (!user) response.status(404).send("data is not found");
+    else user.email = request.body.email;
+    user.password = request.body.password;
+    user.first_name = request.body.first_name;
+    user.last_name = request.body.last_name;
+    user.role = request.body.role;
+    user.week_one = request.body.week_one;
+    user.week_two = request.body.week_two;
 
-          user.email =  request.body.email
-          user.password =  request.body.password
-          user.first_name =  request.body.first_name
-          user.last_name =  request.body.last_name
-          user.role =  request.body.role
-          user.week_one =  request.body.week_one
-          user.week_two =  request.body.week_two
-
-          user.save().then(user => {
-              response.json('user updated!');
-          })
-          .catch(error => {
-              response.status(400).send("Update not possible");
-          });
+    user
+      .save()
+      .then(user => {
+        response.json("user updated!");
+      })
+      .catch(error => {
+        response.status(400).send("Update not possible");
       });
+  });
 });
-
 
 // Login ADDED WK 1 WK 2
 UserRouter.route("/login").post((req, res) => {

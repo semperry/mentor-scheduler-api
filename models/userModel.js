@@ -24,6 +24,7 @@ const User = new Schema({
   },
   week_one: [
     {
+      required: true,
       sunday: {
         start: {
           type: String,
@@ -112,6 +113,7 @@ const User = new Schema({
   ],
   week_two: [
     {
+      required: true,
       sunday: {
         start: {
           type: String,

@@ -20,11 +20,12 @@ const User = new Schema({
     required: true
   },
   role: {
-    type: String
+    type: String,
+    required: true
   },
   week_one: {
     type: Array,
-    default: [
+    default:
       {
         sunday: {
           start: {
@@ -111,11 +112,10 @@ const User = new Schema({
           }
         }
       }
-    ]
   },
   week_two: {
     type: Array,
-    default: [
+    default: 
       {
         sunday: {
           start: {

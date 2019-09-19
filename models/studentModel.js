@@ -37,6 +37,10 @@ const Student = new Schema({
   special_instructions: {
     type: String
   },
+  archived: {
+    type: Boolean,
+    default: false
+  },
   info: [
     {
       notes: {

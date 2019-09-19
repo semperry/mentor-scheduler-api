@@ -62,6 +62,28 @@ StudentRouter.route("/assign-to/:id").put((req, res) => {
   );
 });
 
+// Archive Flag
+StudentRouter.route("/archive/:id").put((req, res) => {
+  Students.findOneAndUpdate(
+    { _id: req.params.id },
+    {
+      $set: {
+        archived: req.body.archived
+      }
+    },
+    {
+      upsert: false
+    },
+    (err, result) => {
+      if (err) {
+        return res.status(400).send(err);
+      } else {
+        return res.send("assigned to: " + " " + req.body.assigned_to);
+      }
+    }
+  );
+});
+
 // Change complete boolean
 StudentRouter.route("/completed/:id").put((req, res) => {
   Students.findOneAndUpdate(

@@ -46,7 +46,8 @@ StudentRouter.route("/assign-to/:id").put((req, res) => {
     { _id: req.params.id },
     {
       $set: {
-        assigned_to: req.body.assigned_to
+        assigned_to: req.body.assigned_to,
+        assigned_by: req.body.assigned_by
       }
     },
     {

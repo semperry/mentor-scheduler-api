@@ -24,7 +24,8 @@ const Student = new Schema({
     type: String
   },
   assigned_by: {
-    type: String
+    type: String,
+    default: ""
   },
   last_submitted_by: {
     type: String

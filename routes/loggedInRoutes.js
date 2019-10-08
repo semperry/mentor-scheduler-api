@@ -7,7 +7,7 @@ const LoggedIn = require("../models/loggedInModel");
 Router.route("/").get((req, res) => {
   LoggedIn.find((err, sessions) => {
     if (sessions) {
-      res.json(sessions);
+      res.status(200).json(sessions);
     } else {
       res.status(404).send(`GET Users error: ${err}`);
     }
@@ -28,6 +28,9 @@ Router.route("/:id").get((req, res) => {
 // New
 Router.route("/new").post((req, res) => {
   const session = new LoggedIn(req.body);
+  session.email = req.body.email;
+  session.session = req.body.session;
+
   session
     .save()
     .then(session => {

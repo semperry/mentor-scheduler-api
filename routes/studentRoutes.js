@@ -85,7 +85,7 @@ StudentRouter.route("/archive/:id").put((req, res) => {
   );
 });
 
-// Change complete boolean
+// Change assigned and submitted
 StudentRouter.route("/completed/:id").put((req, res) => {
   Students.findOneAndUpdate(
     { _id: req.params.id },
@@ -108,7 +108,7 @@ StudentRouter.route("/completed/:id").put((req, res) => {
   );
 });
 
-// Change complete boolean
+// Add Notes to student
 StudentRouter.route("/notes/:id").put((req, res) => {
   Students.findOneAndUpdate(
     { _id: req.params.id },

@@ -1,6 +1,7 @@
 const express = require("express");
 const UserRouter = express.Router();
 const bcrypt = require("bcrypt");
+const uuidv1 = require("uuid/v1");
 
 const Users = require("../models/userModel");
 
@@ -39,6 +40,9 @@ UserRouter.route("/search-name").post((req, res) => {
     }
   );
 });
+
+// TODO
+// Send email via request body instead of url param
 
 // Get one by email
 UserRouter.route("/email/:email").get((req, res) => {
@@ -179,16 +183,21 @@ UserRouter.route("/login").post((req, res) => {
         return res.status(404).send("Email not found");
       } else {
         bcrypt.compare(req.body.password, user.password, (err, result) => {
-          if (result == true) {
-            res.status(200).json({
-              id: user._id,
-              email: user.email,
-              role: user.role,
-              first_name: user.first_name,
-              last_name: user.last_name,
-              week_one: user.week_one,
-              week_two: user.week_two
-            });
+          if (result) {
+            res
+              .status(200)
+              .cookie("_sheduler_Session", uuidv1, {
+                maxAge: 24 * 60 * 60 * 1000
+              })
+              .json({
+                id: user._id,
+                email: user.email,
+                role: user.role,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                week_one: user.week_one,
+                week_two: user.week_two
+              });
           } else {
             res.status(404).send("password does not match " + err);
           }

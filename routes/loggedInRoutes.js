@@ -28,8 +28,6 @@ Router.route("/:id").get((req, res) => {
 // New
 Router.route("/new").post((req, res) => {
   const session = new LoggedIn(req.body);
-  session.email = req.body.email;
-  session.session = req.body.session;
 
   session
     .save()

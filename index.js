@@ -6,7 +6,13 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
-
+// const mockData = [
+//   {
+//     first_name: "Ryan",
+//     last_name: "Curtis",
+//     roles: ["admin", "mentor", "super-user"]
+//   }
+// ]
 const studentRoutes = require("./routes/studentRoutes");
 const userRoutes = require("./routes/userRoutes");
 const loginSessionRoutes = require("./routes/loggedInRoutes");

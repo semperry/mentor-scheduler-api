@@ -15,4 +15,4 @@ const LoggedIn = new Schema({
   }
 });
 
-module.exports = mongoose.model("logged_in", LoggedIn);
+module.exports = mongoose.model("loginSessions", LoggedIn);

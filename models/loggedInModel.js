@@ -3,12 +3,10 @@ const Schema = mongoose.Schema;
 
 const LoggedIn = new Schema({
   email: {
-    type: String,
-    required: true
+    type: String
   },
   session: {
     type: String,
-    required: true,
     unique: true
   },
   session_start: {

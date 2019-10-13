@@ -11,4 +11,4 @@ const CompletedSessions = new Schema({
   }
 });
 
-module.exports = mongoose.model("complete", CompletedSessions);
+module.exports = mongoose.model("completedSessions", CompletedSessions);

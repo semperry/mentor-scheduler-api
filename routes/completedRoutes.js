@@ -30,7 +30,7 @@ CompleteRouter.route("/:id").get((req, res) => {
 
 // GET to check all
 CompleteRouter.route("/").get((req, res) => {
-  LoggedIn.find((err, sessions) => {
+  CompletedModel.find((err, sessions) => {
     if (sessions) {
       res.status(200).json(sessions);
     } else {

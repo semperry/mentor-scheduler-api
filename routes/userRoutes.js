@@ -2,6 +2,7 @@ const express = require("express");
 const UserRouter = express.Router();
 const bcrypt = require("bcrypt");
 const uuidv1 = require("uuid/v1");
+const uuidv4 = require("uuid/v4");
 
 const Users = require("../models/userModel");
 
@@ -184,20 +185,17 @@ UserRouter.route("/login").post((req, res) => {
       } else {
         bcrypt.compare(req.body.password, user.password, (err, result) => {
           if (result) {
-            res
-              .status(200)
-              .cookie("_sheduler_Session", uuidv1, {
-                maxAge: 24 * 60 * 60 * 1000
-              })
-              .json({
-                id: user._id,
-                email: user.email,
-                role: user.role,
-                first_name: user.first_name,
-                last_name: user.last_name,
-                week_one: user.week_one,
-                week_two: user.week_two
-              });
+            const newSession = uuidv4() + uuidv1();
+            res.status(200).json({
+              id: user._id,
+              email: user.email,
+              role: user.role,
+              first_name: user.first_name,
+              last_name: user.last_name,
+              week_one: user.week_one,
+              week_two: user.week_two,
+              session_id: `${newSession}`
+            });
           } else {
             res.status(404).send("password does not match " + err);
           }

@@ -10,6 +10,10 @@ const LoggedIn = new Schema({
     type: String,
     required: true,
     unique: true
+  },
+  session_start: {
+    type: Date,
+    default: new Date()
   }
 });
 

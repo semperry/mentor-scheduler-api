@@ -16,7 +16,7 @@ const mongoose = require("mongoose");
 const studentRoutes = require("./routes/studentRoutes");
 const userRoutes = require("./routes/userRoutes");
 const loginSessionRoutes = require("./routes/loggedInRoutes");
-const redisRoutes = require("./routes/redis-routes");
+const completedRoutes = require("./routes/completedRoutes");
 
 mongoose.Promise = global.Promise;
 mongoose.set("useCreateIndex", true);
@@ -41,7 +41,7 @@ app.use(bodyParser.json());
 app.use("/students", studentRoutes);
 app.use("/mentors", userRoutes);
 app.use("/sessions", loginSessionRoutes);
-app.use("/redis", redisRoutes);
+app.use("/completed", completedRoutes);
 
 app.get("/", (req, res) => {
   res.send("<h1>Mentor Scheduler API</h1");

@@ -42,12 +42,9 @@ UserRouter.route("/search-name").post((req, res) => {
   );
 });
 
-// TODO
-// Send email via request body instead of url param
-
 // Get one by email
-UserRouter.route("/email/:email").get((req, res) => {
-  Users.findOne({ email: req.params.email }, (err, user) => {
+UserRouter.route("/email").post((req, res) => {
+  Users.findOne({ email: req.body.email }, (err, user) => {
     if (!user) {
       return res.status(404).send(`Mentor not found: ${err}`);
     } else {

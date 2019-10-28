@@ -22,72 +22,126 @@ const User = new Schema({
   role: {
     type: String
   },
-  week_one: {
-    type: Array,
-    default: {
+  week_one: [
+    {
       sunday: {
-        start: "",
-        end: ""
+        start: {
+          type: String
+        },
+        end: {
+          type: String
+        }
       },
       monday: {
-        start: "",
-        end: ""
+        start: {
+          type: String
+        },
+        end: {
+          type: String
+        }
       },
       tuesday: {
-        start: "",
-        end: ""
+        start: {
+          type: String
+        },
+        end: {
+          type: String
+        }
       },
       wednesday: {
-        start: "",
-        end: ""
+        start: {
+          type: String
+        },
+        end: {
+          type: String
+        }
       },
       thursday: {
-        start: "",
-        end: ""
+        start: {
+          type: String
+        },
+        end: {
+          type: String
+        }
       },
       friday: {
-        start: "",
-        end: ""
+        start: {
+          type: String
+        },
+        end: {
+          type: String
+        }
       },
       saturday: {
-        start: "",
-        end: ""
+        start: {
+          type: String
+        },
+        end: {
+          type: String
+        }
       }
     }
-  },
-  week_two: {
-    type: Array,
-    default: {
+  ],
+  week_two: [
+    {
       sunday: {
-        start: "",
-        end: ""
+        start: {
+          type: String
+        },
+        end: {
+          type: String
+        }
       },
       monday: {
-        start: "",
-        end: ""
+        start: {
+          type: String
+        },
+        end: {
+          type: String
+        }
       },
       tuesday: {
-        start: "",
-        end: ""
+        start: {
+          type: String
+        },
+        end: {
+          type: String
+        }
       },
       wednesday: {
-        start: "",
-        end: ""
+        start: {
+          type: String
+        },
+        end: {
+          type: String
+        }
       },
       thursday: {
-        start: "",
-        end: ""
+        start: {
+          type: String
+        },
+        end: {
+          type: String
+        }
       },
       friday: {
-        start: "",
-        end: ""
+        start: {
+          type: String
+        },
+        end: {
+          type: String
+        }
       },
       saturday: {
-        start: "",
-        end: ""
+        start: {
+          type: String
+        },
+        end: {
+          type: String
+        }
       }
     }
-  }
+  ]
 });
 
 module.exports = mongoose.model("User", User);

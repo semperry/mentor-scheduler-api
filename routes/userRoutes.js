@@ -71,6 +71,70 @@ UserRouter.route("/new").post((req, res) => {
   bcrypt.genSalt(10, (err, salt) => {
     bcrypt.hash(password, salt, (err, hash) => {
       user.password = hash;
+      (user.week_one = [
+        {
+          sunday: {
+            start: "",
+            end: ""
+          },
+          monday: {
+            start: "",
+            end: ""
+          },
+          tuesday: {
+            start: "",
+            end: ""
+          },
+          wednesday: {
+            start: "",
+            end: ""
+          },
+          thursday: {
+            start: "",
+            end: ""
+          },
+          friday: {
+            start: "",
+            end: ""
+          },
+          saturday: {
+            start: "",
+            end: ""
+          }
+        }
+      ]),
+        (user.week_two = [
+          {
+            sunday: {
+              start: "",
+              end: ""
+            },
+            monday: {
+              start: "",
+              end: ""
+            },
+            tuesday: {
+              start: "",
+              end: ""
+            },
+            wednesday: {
+              start: "",
+              end: ""
+            },
+            thursday: {
+              start: "",
+              end: ""
+            },
+            friday: {
+              start: "",
+              end: ""
+            },
+            saturday: {
+              start: "",
+              end: ""
+            }
+          }
+        ]);
 
       user
         .save()
@@ -88,7 +152,7 @@ UserRouter.route("/new").post((req, res) => {
 
 // TODO: Update/:id should be a patch/put. Create encrytption for update password
 // UPDATING A USER
-UserRouter.route("/update/:id").patch((request, response) => {
+UserRouter.route("/update/:id").post((request, response) => {
   Users.findById(request.params.id, (error, user) => {
     if (!user) response.status(404).send("data is not found");
     else user.email = request.body.email;
@@ -131,7 +195,7 @@ UserRouter.route("/login").post((req, res) => {
               session_id: `${newSession}`
             });
           } else {
-            res.status(401).send("password does not match " + err);
+            res.status(404).send("password does not match " + err);
           }
         });
       }

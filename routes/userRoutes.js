@@ -86,27 +86,42 @@ UserRouter.route("/new").post((req, res) => {
 
 // ADDED vvv
 
-// TODO: Update/:id should be a patch/put. Create encrytption for update password
+// TODO: Create encrytption for update password
 // UPDATING A USER
-UserRouter.route("/update/:id").post((request, response) => {
+UserRouter.route("/update/:id").patch((request, response) => {
   Users.findById(request.params.id, (error, user) => {
     if (!user) response.status(404).send("data is not found");
-    else user.email = request.body.email;
-    user.password = request.body.password;
-    user.first_name = request.body.first_name;
-    user.last_name = request.body.last_name;
-    user.role = request.body.role;
-    user.week_one = request.body.week_one;
-    user.week_two = request.body.week_two;
-
-    user
-      .save()
-      .then(user => {
-        response.json("user updated!");
-      })
-      .catch(error => {
-        response.status(400).send("Update not possible");
+    else {
+      Object.keys(request.body).forEach(i => {
+        user[i] = request.body[i];
+        console.log(user);
       });
+      user
+        .save()
+        .then(user => {
+          response.status(200).json(user);
+        })
+        .catch(err => {
+          response.status(400).send("Could not update: " + err);
+        });
+    }
+    // user[req.body] = req.body
+    // user.email = request.body.email;
+    // user.password = request.body.password;
+    // user.first_name = request.body.first_name;
+    // user.last_name = request.body.last_name;
+    // user.role = request.body.role;
+    // user.week_one = request.body.week_one;
+    // user.week_two = request.body.week_two;
+
+    // // user
+    // //   .save()
+    // //   .then(user => {
+    // //     response.json("user updated!");
+    // //   })
+    //   .catch(error => {
+    //     response.status(400).send("Update not possible");
+    //   });
   });
 });
 

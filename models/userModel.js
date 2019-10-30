@@ -19,9 +19,6 @@ const User = new Schema({
     type: String,
     required: true
   },
-  role: {
-    type: String
-  },
   roles: {
     type: Array,
     default: ["mentor"]

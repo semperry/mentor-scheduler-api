@@ -51,7 +51,6 @@ UserRouter.route("/email").post((req, res) => {
       return res.status(200).json({
         id: user._id,
         email: user.email,
-        role: user.role,
         roles: user.roles,
         first_name: user.first_name,
         last_name: user.last_name,
@@ -160,7 +159,6 @@ UserRouter.route("/update/:id").post((request, response) => {
     user.password = request.body.password;
     user.first_name = request.body.first_name;
     user.last_name = request.body.last_name;
-    user.role = request.body.role;
     user.week_one = request.body.week_one;
     user.week_two = request.body.week_two;
     user.roles = request.body.roles;

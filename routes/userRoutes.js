@@ -189,7 +189,7 @@ UserRouter.route("/login").post((req, res) => {
             res.status(200).json({
               id: user._id,
               email: user.email,
-              role: user.role,
+              roles: user.roles,
               first_name: user.first_name,
               last_name: user.last_name,
               week_one: user.week_one,

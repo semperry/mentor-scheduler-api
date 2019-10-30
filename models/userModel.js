@@ -22,6 +22,10 @@ const User = new Schema({
   role: {
     type: String
   },
+  roles: {
+    type: Array,
+    default: ["mentor"]
+  },
   week_one: [
     {
       sunday: {

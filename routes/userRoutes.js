@@ -148,29 +148,32 @@ UserRouter.route("/new").post((req, res) => {
   });
 });
 
-// ADDED vvv
-
-// TODO: Update/:id should be a patch/put. Create encrytption for update password
-// UPDATING A USER
-UserRouter.route("/update/:id").post((request, response) => {
+// Update Mentor Object by ID
+UserRouter.route("/update/:id").patch((request, response) => {
   Users.findById(request.params.id, (error, user) => {
     if (!user) response.status(404).send("data is not found");
-    else user.email = request.body.email;
-    user.password = request.body.password;
-    user.first_name = request.body.first_name;
-    user.last_name = request.body.last_name;
-    user.week_one = request.body.week_one;
-    user.week_two = request.body.week_two;
-    user.roles = request.body.roles;
+    else {
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(request.body.password, salt, (err, hash) => {
+          user.email = request.body.email;
+          user.password = hash;
+          user.first_name = request.body.first_name;
+          user.last_name = request.body.last_name;
+          user.week_one = request.body.week_one;
+          user.week_two = request.body.week_two;
+          user.roles = request.body.roles;
 
-    user
-      .save()
-      .then(user => {
-        response.json("user updated!");
-      })
-      .catch(error => {
-        response.status(400).send("Update not possible");
+          user
+            .save()
+            .then(user => {
+              response.json("user updated!");
+            })
+            .catch(error => {
+              response.status(400).send("Update not possible");
+            });
+        });
       });
+    }
   });
 });
 
@@ -195,7 +198,7 @@ UserRouter.route("/login").post((req, res) => {
               session_id: `${newSession}`
             });
           } else {
-            res.status(404).send("password does not match " + err);
+            res.status(404).send("password does not match: " + err);
           }
         });
       }
